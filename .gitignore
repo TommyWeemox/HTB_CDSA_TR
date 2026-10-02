@@ -1,0 +1,32 @@
+# MkDocs
+site/
+.cache/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+.idea/
+
+# Secrets & données sensibles (VPN HTB, clés, flags, captures)
+*.ovpn
+*.pem
+*.key
+.env
+secrets/
+*.pcap
+*.pcapng
+*.evtx
+*.raw
+*.mem
+*.dmp
+*.vmdk
+*.ova
+
+# Claude Code (local)
+.claude/settings.local.json

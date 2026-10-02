@@ -1,0 +1,111 @@
+site_name: SOC Lab — CDSA & MAD ATT&CK
+site_description: Environnement d'étude SOC / Threat Hunting / Detection Engineering (HTB CDSA, MITRE ATT&CK Defender)
+docs_dir: docs
+
+theme:
+  name: material
+  language: fr
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: cyan
+      toggle: { icon: material/weather-sunny, name: Mode clair }
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: cyan
+      toggle: { icon: material/weather-night, name: Mode sombre }
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - toc.follow
+
+plugins:
+  - search
+  - tags
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+nav:
+  - Accueil: index.md
+  - Plan d'étude:
+      - study-plan/index.md
+      - Planning 12 semaines: study-plan/12-weeks.md
+      - Suivi de progression: study-plan/progress.md
+  - HTB CDSA:
+      - cdsa/index.md
+      - Examen: cdsa/exam.md
+      - SIEM & Monitoring: cdsa/01-siem-monitoring.md
+      - Windows Event Logs: cdsa/02-windows-event-logs.md
+      - Threat Hunting (Elastic): cdsa/03-threat-hunting-elastic.md
+      - Splunk: cdsa/04-splunk.md
+      - Attaques Windows & défense: cdsa/05-windows-attacks.md
+      - Network Traffic Analysis: cdsa/06-network-traffic-analysis.md
+      - IDS / IPS: cdsa/07-ids-ips.md
+      - Malware Analysis: cdsa/08-malware-analysis.md
+      - Forensics: cdsa/09-forensics.md
+      - Incident Handling: cdsa/10-incident-handling.md
+  - MITRE ATT&CK Defender:
+      - mad/index.md
+      - ATT&CK Fundamentals: mad/fundamentals.md
+      - Cyber Threat Intelligence: mad/cti.md
+      - SOC Assessments: mad/soc-assessments.md
+      - Threat Hunting & Detection: mad/hunting-detection.md
+      - Adversary Emulation: mad/adversary-emulation.md
+      - Tactiques ATT&CK: mad/tactics.md
+  - Threat Hunting:
+      - hunting/index.md
+      - Méthodologie: hunting/methodology.md
+      - Playbook de hypothèses: hunting/hypotheses.md
+  - Detection Engineering:
+      - detection-engineering/index.md
+      - Sigma: detection-engineering/sigma.md
+      - Cycle de vie d'une détection: detection-engineering/lifecycle.md
+      - Tests (Atomic Red Team): detection-engineering/testing.md
+  - Cheatsheets:
+      - cheatsheets/index.md
+      - Splunk SPL: cheatsheets/splunk-spl.md
+      - Elastic KQL / EQL: cheatsheets/elastic.md
+      - Windows Event IDs: cheatsheets/windows-event-ids.md
+      - Sysmon Event IDs: cheatsheets/sysmon.md
+      - Réseau (Zeek / tshark / Suricata): cheatsheets/network.md
+      - Forensics & Malware: cheatsheets/forensics-malware.md
+  - Labs:
+      - labs/index.md
+      - Home lab SOC: labs/home-lab.md
+      - Journal de labs: labs/journal.md
+  - Ressources:
+      - resources/index.md
+      - Glossaire: resources/glossary.md
+      - Templates: resources/templates.md
