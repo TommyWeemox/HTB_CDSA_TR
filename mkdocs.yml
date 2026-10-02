@@ -30,6 +30,12 @@ theme:
     - content.tabs.link
     - toc.follow
 
+extra_css:
+  - stylesheets/quiz.css
+
+extra_javascript:
+  - javascripts/quiz.js
+
 plugins:
   - search
   - tags
@@ -65,10 +71,19 @@ nav:
       - study-plan/index.md
       - Planning 12 semaines: study-plan/12-weeks.md
       - Suivi de progression: study-plan/progress.md
+      - Tableau de bord des quiz: study-plan/quizzes.md
   - HTB CDSA:
       - cdsa/index.md
       - Examen: cdsa/exam.md
-      - SIEM & Monitoring: cdsa/01-siem-monitoring.md
+      - "1. SOC, SIEM & Monitoring":
+          - cdsa/01-siem/index.md
+          - Le SOC: cdsa/01-siem/01-soc.md
+          - Architecture d'un SIEM: cdsa/01-siem/02-architecture.md
+          - Use cases & détection: cdsa/01-siem/03-use-cases.md
+          - Triage & investigation: cdsa/01-siem/04-triage.md
+          - Métriques & maturité: cdsa/01-siem/05-metrics.md
+          - Labs: cdsa/01-siem/06-labs.md
+          - Quiz: cdsa/01-siem/07-quiz.md
       - Windows Event Logs: cdsa/02-windows-event-logs.md
       - Threat Hunting (Elastic): cdsa/03-threat-hunting-elastic.md
       - Splunk: cdsa/04-splunk.md

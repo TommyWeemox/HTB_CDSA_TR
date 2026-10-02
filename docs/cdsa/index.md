@@ -9,7 +9,7 @@
 
 | # | Note | Compétence clé |
 |---|---|---|
-| 1 | [SIEM & Monitoring](01-siem-monitoring.md) | Architecture SIEM, use cases, alerting |
+| 1 | [SIEM & Monitoring](01-siem/index.md) | Architecture SIEM, use cases, alerting |
 | 2 | [Windows Event Logs](02-windows-event-logs.md) | Event IDs, Sysmon, ETW |
 | 3 | [Threat Hunting (Elastic)](03-threat-hunting-elastic.md) | Hypothèses, KQL, hunts |
 | 4 | [Splunk](04-splunk.md) | SPL, sources de logs, investigation |

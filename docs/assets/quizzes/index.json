@@ -1,0 +1,10 @@
+{
+  "quizzes": [
+    {
+      "id": "cdsa-01-siem",
+      "title": "Module 1 : SOC, SIEM & Monitoring",
+      "src": "assets/quizzes/cdsa-01-siem.json",
+      "page": "cdsa/01-siem/07-quiz/"
+    }
+  ]
+}

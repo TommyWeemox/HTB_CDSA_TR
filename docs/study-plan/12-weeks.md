@@ -4,7 +4,7 @@ Planning indicatif à ajuster selon ton niveau et ton temps disponible.
 
 | Semaine | Thème | CDSA | MAD |
 |---|---|---|---|
-| 1 | Fondations SOC & SIEM | [SIEM](../cdsa/01-siem-monitoring.md) | [ATT&CK Fundamentals](../mad/fundamentals.md) |
+| 1 | Fondations SOC & SIEM | [SIEM](../cdsa/01-siem/index.md) | [ATT&CK Fundamentals](../mad/fundamentals.md) |
 | 2 | Logs Windows | [Event Logs](../cdsa/02-windows-event-logs.md) | [Tactiques](../mad/tactics.md) |
 | 3 | Elastic & hunting | [Elastic](../cdsa/03-threat-hunting-elastic.md) | [CTI](../mad/cti.md) |
 | 4 | Splunk | [Splunk](../cdsa/04-splunk.md) | CTI (suite) |
