@@ -1,4 +1,6 @@
 site_name: SOC Lab — CDSA & MAD ATT&CK
+site_url: https://tommyweemox.github.io/HTB_CDSA_TR/
+repo_url: https://github.com/TommyWeemox/HTB_CDSA_TR
 site_description: Environnement d'étude SOC / Threat Hunting / Detection Engineering (HTB CDSA, MITRE ATT&CK Defender)
 docs_dir: docs
 
