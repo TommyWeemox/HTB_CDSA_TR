@@ -28,3 +28,12 @@
 .quiz-verdict { margin-top: .2rem; }
 .quiz-actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
 .quiz-tags, .quiz-dashboard-table { width: 100%; }
+
+/* Téléphone : zones de tap confortables, boutons pleine largeur */
+@media (max-width: 600px) {
+  .quiz, .quiz-dashboard { padding: .8rem; }
+  .quiz-choice { padding: .75rem .8rem; }
+  .quiz-choice input { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+  .quiz-btn, .quiz-actions .md-button { width: 100%; text-align: center; }
+  .quiz-actions { flex-direction: column; }
+}
