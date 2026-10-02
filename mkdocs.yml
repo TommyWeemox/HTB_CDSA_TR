@@ -82,8 +82,11 @@ nav:
           - Use cases & détection: cdsa/01-siem/03-use-cases.md
           - Triage & investigation: cdsa/01-siem/04-triage.md
           - Métriques & maturité: cdsa/01-siem/05-metrics.md
-          - Labs: cdsa/01-siem/06-labs.md
-          - Quiz: cdsa/01-siem/07-quiz.md
+          - Lire un log (annoté): cdsa/01-siem/06-logs-annotes.md
+          - Elastic & Kibana pas à pas: cdsa/01-siem/07-elastic-kibana.md
+          - Cas travaillés: cdsa/01-siem/08-cas-travailles.md
+          - Labs: cdsa/01-siem/09-labs.md
+          - Quiz: cdsa/01-siem/10-quiz.md
       - Windows Event Logs: cdsa/02-windows-event-logs.md
       - Threat Hunting (Elastic): cdsa/03-threat-hunting-elastic.md
       - Splunk: cdsa/04-splunk.md

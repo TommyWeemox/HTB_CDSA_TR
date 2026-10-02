@@ -2,9 +2,9 @@
 tags: [cdsa, labs, siem]
 ---
 
-# 6. Labs
+# 9. Labs
 
-Cinq exercices progressifs. Chacun produit un **livrable** à versionner dans le dépôt. Coche-les dans le [suivi de progression](../../study-plan/progress.md) une fois terminés.
+Six exercices progressifs. Chacun produit un **livrable** à versionner dans le dépôt. Coche-les dans le [suivi de progression](../../study-plan/progress.md) une fois terminés.
 
 !!! danger "Environnement"
     Tout se fait dans ton [home lab isolé](../../labs/home-lab.md), jamais sur un poste ou réseau de production.
@@ -81,6 +81,18 @@ Pour chacun : requête, seuil/condition, sévérité, faux positifs attendus, ru
 
 **Livrable** : `hunts/AAAA-MM-JJ_spraying-rdp.md` (depuis `hunts/TEMPLATE.md`) + note de clôture.
 **Vérification** : ta chronologie correspond à ce que tu as réellement fait côté attaquant.
+
+## Lab 6 : Règles Kibana et séquence EQL *(2 h)*
+
+**Objectif** : passer de la requête à la **règle de détection** dans Elastic (voir [chapitre 7](07-elastic-kibana.md)).
+
+1. Dans Discover, écris les 4 requêtes KQL du chapitre 7 et **corrige les noms de champs** selon tes données réelles.
+2. Crée une règle **Threshold** (≥ 20 échecs 4625 par `source.ip` en 5 min) avec le mapping ATT&CK T1110.
+3. Crée une règle **EQL** « 10 échecs puis un succès » sur la même source.
+4. Déclenche-les depuis ta VM d'attaque et vérifie les alertes. Règle ensuite `Additional look-back time` et explique pourquoi.
+
+**Livrable** : export des deux règles (JSON/NDJSON) dans `detections/kql/` + 5 lignes sur les pièges rencontrés.
+**Vérification** : les deux règles se déclenchent sur ta simulation et **pas** sur une connexion normale.
 
 ## Défi final
 

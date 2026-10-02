@@ -14,7 +14,10 @@ Ce module pose les bases sur lesquelles reposent tous les autres : **comment un 
 - [x] décrire le pipeline d'un SIEM (collecte → parsing → stockage → corrélation → alerte) et ses points de défaillance ;
 - [x] concevoir un use case de détection complet (menace, données, logique, sévérité, runbook) ;
 - [x] trier une alerte avec méthode : qualifier, enrichir, pivoter, escalader, documenter ;
-- [x] mesurer l'efficacité d'un SOC sans tomber dans les pièges des métriques.
+- [x] mesurer l'efficacité d'un SOC sans tomber dans les pièges des métriques ;
+- [x] lire un log brut (Windows, Sysmon, SSH, pare-feu) et en extraire l'essentiel ;
+- [x] manipuler Kibana : Discover, KQL, EQL, règles de détection ;
+- [x] qualifier quatre types d'alertes différents (faux positif, bénin, intrusion, perte de visibilité).
 
 ## Plan
 
@@ -25,8 +28,11 @@ Ce module pose les bases sur lesquelles reposent tous les autres : **comment un 
 | [3. Use cases & détection](03-use-cases.md) | Types de logique, brute force, tuning, sévérité, runbooks | 1 h 30 |
 | [4. Triage & investigation](04-triage.md) | Workflow, enrichissement, pivots, biais, cas pratique | 1 h 30 |
 | [5. Métriques & maturité](05-metrics.md) | MTTD/MTTR, couverture, pièges | 45 min |
-| [6. Labs](06-labs.md) | 5 exercices concrets avec livrables | 4 à 6 h |
-| [7. Quiz](07-quiz.md) | 31 questions avec explications | 30 min |
+| [6. Lire un log](06-logs-annotes.md) | Événements Windows, Sysmon, SSH, pare-feu annotés champ par champ | 1 h 30 |
+| [7. Elastic & Kibana](07-elastic-kibana.md) | Discover, KQL et ses pièges, EQL, règles de détection | 2 h |
+| [8. Cas travaillés](08-cas-travailles.md) | 4 alertes, 4 issues : faux positif, bénin, intrusion, angle mort | 2 h |
+| [9. Labs](09-labs.md) | 6 exercices concrets avec livrables | 5 à 8 h |
+| [10. Quiz](10-quiz.md) | 49 questions dont des scénarios, avec explications | 45 min |
 
 ## Comment étudier ce module
 

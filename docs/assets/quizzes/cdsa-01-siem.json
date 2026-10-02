@@ -3,7 +3,10 @@
   "title": "Module 1 : SOC, SIEM & Monitoring",
   "questions": [
     {
-      "id": "soc-01", "tags": ["soc"],
+      "id": "soc-01",
+      "tags": [
+        "soc"
+      ],
       "q": "Quelle est la tâche principale d'un analyste de niveau 1 (L1) ?",
       "choices": [
         "Surveiller la file d'alertes, qualifier, enrichir puis clore ou escalader",
@@ -11,18 +14,33 @@
         "Rétro-ingénierer les malwares complexes",
         "Concevoir l'architecture réseau de l'entreprise"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Le L1 fait le **triage** : il qualifie les alertes et décide de clore ou d'escalader. L'analyse de malware relève plutôt du L3."
     },
     {
-      "id": "soc-02", "tags": ["soc"],
+      "id": "soc-02",
+      "tags": [
+        "soc"
+      ],
       "q": "Quel outil agrège et corrèle les logs de **sources multiples** (pare-feu, AD, proxy, EDR) ?",
-      "choices": ["Le SIEM", "L'EDR", "Un scanner de vulnérabilités", "Un antivirus"],
-      "answer": [0],
+      "choices": [
+        "Le SIEM",
+        "L'EDR",
+        "Un scanner de vulnérabilités",
+        "Un antivirus"
+      ],
+      "answer": [
+        0
+      ],
       "explain": "Le **SIEM** offre la vue transversale. L'EDR a une vue profonde mais limitée aux hôtes qu'il couvre."
     },
     {
-      "id": "soc-03", "tags": ["soc"],
+      "id": "soc-03",
+      "tags": [
+        "soc"
+      ],
       "q": "À quoi sert principalement un SOAR ?",
       "choices": [
         "Orchestrer et automatiser la réponse via des playbooks",
@@ -30,25 +48,51 @@
         "Analyser le trafic réseau en profondeur",
         "Détecter les vulnérabilités applicatives"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "**SOAR** = *Security Orchestration, Automation and Response* : il enchaîne des actions (enrichir, isoler, notifier) selon des playbooks."
     },
     {
-      "id": "soc-04", "tags": ["soc", "attack"],
+      "id": "soc-04",
+      "tags": [
+        "soc",
+        "attack"
+      ],
       "q": "Selon la Pyramid of Pain, quel type d'indicateur est le **plus pénible** à changer pour l'adversaire ?",
-      "choices": ["Les TTPs (comportements)", "Les adresses IP", "Les hashes de fichiers", "Les noms de domaine"],
-      "answer": [0],
+      "choices": [
+        "Les TTPs (comportements)",
+        "Les adresses IP",
+        "Les hashes de fichiers",
+        "Les noms de domaine"
+      ],
+      "answer": [
+        0
+      ],
       "explain": "Changer de **TTPs** oblige l'adversaire à modifier sa façon de travailler. Un hash ou une IP se changent presque sans effort."
     },
     {
-      "id": "soc-05", "tags": ["soc"],
+      "id": "soc-05",
+      "tags": [
+        "soc"
+      ],
       "q": "Un administrateur lance un scan réseau planifié. La règle de détection se déclenche correctement. Comment classer l'alerte ?",
-      "choices": ["Vrai positif bénin", "Faux positif", "Faux négatif", "Vrai positif malveillant"],
-      "answer": [0],
+      "choices": [
+        "Vrai positif bénin",
+        "Faux positif",
+        "Faux négatif",
+        "Vrai positif malveillant"
+      ],
+      "answer": [
+        0
+      ],
       "explain": "La règle a **bien détecté** l'activité, mais elle est **autorisée** : vrai positif bénin. Un faux positif désignerait une règle qui se déclenche à tort."
     },
     {
-      "id": "soc-06", "tags": ["soc"],
+      "id": "soc-06",
+      "tags": [
+        "soc"
+      ],
       "q": "Quelles tâches relèvent typiquement du niveau 3 (ou d'une fonction avancée) ?",
       "choices": [
         "Threat hunting",
@@ -56,11 +100,19 @@
         "Analyse de malware",
         "Premier tri de chaque alerte entrante"
       ],
-      "answer": [0, 1, 2],
+      "answer": [
+        0,
+        1,
+        2
+      ],
       "explain": "Hunting, ingénierie de détection et analyse de malware sont des fonctions expertes. Le premier tri est la mission du L1."
     },
     {
-      "id": "arch-01", "tags": ["architecture", "siem"],
+      "id": "arch-01",
+      "tags": [
+        "architecture",
+        "siem"
+      ],
       "q": "Quel est l'ordre logique du pipeline d'un SIEM ?",
       "choices": [
         "Collecte → parsing/normalisation → stockage → corrélation → alerte",
@@ -68,11 +120,16 @@
         "Parsing → alerte → collecte → stockage",
         "Stockage → collecte → alerte → parsing"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Les logs sont d'abord **collectés**, puis **parsés et normalisés**, **stockés**, **corrélés** et enfin transformés en **alertes**."
     },
     {
-      "id": "arch-02", "tags": ["architecture"],
+      "id": "arch-02",
+      "tags": [
+        "architecture"
+      ],
       "q": "Quel est le principal risque de l'envoi de logs en **syslog UDP** ?",
       "choices": [
         "Aucune garantie de livraison : des logs peuvent être perdus sans alerte",
@@ -80,11 +137,16 @@
         "Le protocole ne supporte que Windows",
         "Il ne fonctionne que sur le réseau local"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "UDP n'offre **ni accusé de réception ni chiffrement**. Préfère TCP/TLS ou un agent."
     },
     {
-      "id": "arch-03", "tags": ["architecture"],
+      "id": "arch-03",
+      "tags": [
+        "architecture"
+      ],
       "q": "Quels sont des avantages d'un **agent** de collecte par rapport à du syslog UDP ?",
       "choices": [
         "Tampon local en cas de coupure réseau",
@@ -92,11 +154,17 @@
         "Aucun logiciel à installer sur les hôtes",
         "Les événements ne nécessitent jamais de parsing"
       ],
-      "answer": [0, 1],
+      "answer": [
+        0,
+        1
+      ],
       "explain": "L'agent **met en tampon** et peut **filtrer/enrichir** à la source. En contrepartie, il faut le **déployer et le maintenir** : l'absence d'installation caractérise l'approche sans agent."
     },
     {
-      "id": "arch-04", "tags": ["architecture"],
+      "id": "arch-04",
+      "tags": [
+        "architecture"
+      ],
       "q": "Pourquoi adopter un schéma de normalisation commun (ECS, CIM, ASIM, OCSF) ?",
       "choices": [
         "Pour interroger des sources différentes avec les mêmes noms de champs",
@@ -104,11 +172,16 @@
         "Pour réduire la taille des logs de 90 %",
         "Pour supprimer le besoin d'agents"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Un schéma commun permet **une requête pour plusieurs sources** (ex. `source.ip` valable pour pare-feu, proxy et VPN) et rend les règles réutilisables."
     },
     {
-      "id": "arch-05", "tags": ["architecture"],
+      "id": "arch-05",
+      "tags": [
+        "architecture"
+      ],
       "q": "Splunk extrait majoritairement les champs…",
       "choices": [
         "au moment de la recherche (schema-on-read)",
@@ -116,11 +189,17 @@
         "uniquement sur l'agent, avant envoi",
         "il n'extrait aucun champ"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Splunk privilégie le **schema-on-read** : plus flexible, mais plus coûteux à la recherche. Elastic applique plutôt un mapping à l'ingestion (schema-on-write)."
     },
     {
-      "id": "arch-06", "tags": ["architecture", "data-quality"],
+      "id": "arch-06",
+      "tags": [
+        "architecture",
+        "data-quality"
+      ],
       "q": "Pourquoi une **source de logs silencieuse** est-elle dangereuse ?",
       "choices": [
         "Toutes les détections reposant sur cette source deviennent aveugles, sans erreur visible",
@@ -128,11 +207,17 @@
         "Elle déclenche de nombreux faux positifs",
         "Elle bloque l'agent des autres hôtes"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Sans données, **aucune règle ne peut se déclencher** et rien n'indique le problème. D'où l'intérêt d'une alerte de santé des sources."
     },
     {
-      "id": "arch-07", "tags": ["architecture", "data-quality"],
+      "id": "arch-07",
+      "tags": [
+        "architecture",
+        "data-quality"
+      ],
       "q": "Pourquoi la synchronisation NTP et l'usage d'UTC sont-ils importants pour un SIEM ?",
       "choices": [
         "La corrélation entre sources repose sur des horodatages cohérents",
@@ -140,11 +225,16 @@
         "Ils chiffrent les journaux",
         "Ils sont requis uniquement pour Windows"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Des horloges ou fuseaux incohérents faussent la **chronologie** et les corrélations (séquences, fenêtres de temps)."
     },
     {
-      "id": "arch-08", "tags": ["architecture"],
+      "id": "arch-08",
+      "tags": [
+        "architecture"
+      ],
       "q": "À quoi correspond la distinction hot / warm / cold du stockage ?",
       "choices": [
         "Un compromis entre coût de stockage et rapidité d'accès selon l'âge des données",
@@ -152,11 +242,17 @@
         "Trois types d'agents de collecte",
         "Trois niveaux d'analystes SOC"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Les données récentes restent sur du stockage rapide (**hot**), les plus anciennes migrent vers du stockage moins coûteux (**warm/cold**)."
     },
     {
-      "id": "arch-09", "tags": ["architecture", "attack"],
+      "id": "arch-09",
+      "tags": [
+        "architecture",
+        "attack"
+      ],
       "q": "Pour détecter du DCSync (T1003.006), de quelles données as-tu besoin en priorité ?",
       "choices": [
         "Les journaux de sécurité des contrôleurs de domaine (événement 4662)",
@@ -164,18 +260,33 @@
         "Les logs d'une imprimante réseau",
         "Les logs DHCP des postes clients uniquement"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "DCSync abuse la **réplication AD**, visible dans l'événement **4662** sur les contrôleurs de domaine (audit du service d'annuaire activé)."
     },
     {
-      "id": "uc-01", "tags": ["detection"],
+      "id": "uc-01",
+      "tags": [
+        "detection"
+      ],
       "q": "« Plus de 20 échecs 4625 depuis la même IP en 5 minutes » est un exemple de détection par…",
-      "choices": ["Seuil", "Signature IOC", "Machine learning", "Séquence de trois événements"],
-      "answer": [0],
+      "choices": [
+        "Seuil",
+        "Signature IOC",
+        "Machine learning",
+        "Séquence de trois événements"
+      ],
+      "answer": [
+        0
+      ],
       "explain": "On **compte** des événements dans une fenêtre de temps : c'est une règle à **seuil**."
     },
     {
-      "id": "uc-02", "tags": ["detection"],
+      "id": "uc-02",
+      "tags": [
+        "detection"
+      ],
       "q": "Des échecs de connexion répétés **suivis d'un succès** pour le même compte depuis la même IP : que suggère ce motif ?",
       "choices": [
         "Un compte probablement compromis après une tentative de devinette",
@@ -183,11 +294,17 @@
         "Un problème de synchronisation NTP",
         "Une panne de l'annuaire"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "La **séquence échecs → succès** augmente fortement la probabilité d'un accès obtenu par force brute ou spraying. La sévérité doit monter."
     },
     {
-      "id": "uc-03", "tags": ["detection", "attack"],
+      "id": "uc-03",
+      "tags": [
+        "detection",
+        "attack"
+      ],
       "q": "Quelle description correspond au **password spraying** ?",
       "choices": [
         "Peu de mots de passe testés sur de nombreux comptes",
@@ -195,11 +312,17 @@
         "Réutilisation de couples identifiant/mot de passe issus de fuites",
         "Interception de mots de passe sur le réseau"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Le spraying évite le verrouillage en testant **peu de mots de passe par compte**. Plusieurs comptes distincts apparaissent pour une même source."
     },
     {
-      "id": "uc-04", "tags": ["detection", "attack"],
+      "id": "uc-04",
+      "tags": [
+        "detection",
+        "attack"
+      ],
       "q": "Qu'est-ce que le credential stuffing ?",
       "choices": [
         "L'utilisation de couples identifiant/mot de passe volés lors d'autres fuites",
@@ -207,11 +330,16 @@
         "L'extraction de hashes depuis LSASS",
         "La création de faux comptes pour contourner la MFA"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Les attaquants **rejouent des identifiants fuités** en espérant que les victimes les aient réutilisés. Les échecs sont souvent répartis sur beaucoup de comptes et de sources."
     },
     {
-      "id": "uc-05", "tags": ["detection"],
+      "id": "uc-05",
+      "tags": [
+        "detection"
+      ],
       "q": "Une règle produit 200 faux positifs par jour à cause d'un scanner interne. Quelle est la meilleure approche ?",
       "choices": [
         "Exclure précisément le scanner, documenter l'exception avec propriétaire et date de revue",
@@ -219,11 +347,16 @@
         "Multiplier le seuil par dix pour toute l'entreprise",
         "Ignorer ces alertes sans rien changer"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "On **exclut précisément**, on **documente** et on **revoit**. Désactiver ou relever massivement un seuil crée des angles morts."
     },
     {
-      "id": "uc-06", "tags": ["detection"],
+      "id": "uc-06",
+      "tags": [
+        "detection"
+      ],
       "q": "Quels éléments font partie d'un use case de détection bien défini ?",
       "choices": [
         "La menace/technique visée et les sources de logs requises",
@@ -231,11 +364,18 @@
         "Un runbook pour l'analyste",
         "Uniquement le nom du créateur de la règle"
       ],
-      "answer": [0, 1, 2],
+      "answer": [
+        0,
+        1,
+        2
+      ],
       "explain": "Un use case associe **menace, données, logique, sévérité et runbook**, ainsi qu'un propriétaire et une date de revue. Le nom de l'auteur seul n'a aucune valeur opérationnelle."
     },
     {
-      "id": "uc-07", "tags": ["detection"],
+      "id": "uc-07",
+      "tags": [
+        "detection"
+      ],
       "q": "Quelle est la conséquence principale de l'alert fatigue ?",
       "choices": [
         "Les analystes finissent par ignorer ou banaliser de vraies alertes",
@@ -243,11 +383,16 @@
         "Le stockage devient impossible",
         "Les règles se corrigent automatiquement"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Trop d'alertes peu utiles **noient les vraies attaques**. Une règle bruyante est un risque de sécurité."
     },
     {
-      "id": "uc-08", "tags": ["detection"],
+      "id": "uc-08",
+      "tags": [
+        "detection"
+      ],
       "q": "Comment prioriser une alerte de façon pertinente ?",
       "choices": [
         "En combinant la confiance du comportement détecté et la criticité de l'actif",
@@ -255,11 +400,16 @@
         "Uniquement selon le nombre d'événements",
         "Toutes les alertes ont la même priorité"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Un comportement fortement suspect sur un **actif critique** (contrôleur de domaine, compte admin) passe avant tout."
     },
     {
-      "id": "tri-01", "tags": ["triage"],
+      "id": "tri-01",
+      "tags": [
+        "triage"
+      ],
       "q": "Quel est le bon premier réflexe en recevant une alerte ?",
       "choices": [
         "Comprendre ce que la règle détecte et vérifier que l'activité a réellement eu lieu",
@@ -267,11 +417,16 @@
         "Isoler immédiatement l'hôte concerné",
         "Réinitialiser les mots de passe de tous les utilisateurs"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "On commence par **comprendre et valider**. Agir (isoler, réinitialiser) sans comprendre peut perturber l'activité et détruire des preuves."
     },
     {
-      "id": "tri-02", "tags": ["triage"],
+      "id": "tri-02",
+      "tags": [
+        "triage"
+      ],
       "q": "Après 25 échecs 4625 depuis une IP externe, pourquoi chercher ensuite des événements 4624 ?",
       "choices": [
         "Pour savoir si l'attaque a réussi : un succès change radicalement la gravité",
@@ -279,11 +434,16 @@
         "Pour réduire le volume d'alertes",
         "Parce que 4625 n'est pas fiable"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "**4624** = ouverture de session réussie. Un succès après des échecs indique une **compromission probable**."
     },
     {
-      "id": "tri-03", "tags": ["triage"],
+      "id": "tri-03",
+      "tags": [
+        "triage"
+      ],
       "q": "Quelle précaution prendre lors de l'enrichissement avec un service public de réputation ?",
       "choices": [
         "Ne pas y envoyer de fichiers ou données internes sensibles ; privilégier le hash",
@@ -291,11 +451,16 @@
         "Désactiver la journalisation locale",
         "Aucune précaution n'est nécessaire"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Ces services **partagent** ce qu'on soumet. Un hash suffit souvent et ne divulgue pas le contenu."
     },
     {
-      "id": "tri-04", "tags": ["triage"],
+      "id": "tri-04",
+      "tags": [
+        "triage"
+      ],
       "q": "Quel comportement illustre le biais de confirmation ?",
       "choices": [
         "Ne chercher que les éléments qui confirment son hypothèse initiale",
@@ -303,11 +468,16 @@
         "Demander l'avis d'un collègue",
         "Documenter toutes ses actions"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Parade : chercher activement ce qui **contredit** l'hypothèse et formuler une hypothèse alternative."
     },
     {
-      "id": "tri-05", "tags": ["triage"],
+      "id": "tri-05",
+      "tags": [
+        "triage"
+      ],
       "q": "Dans quels cas faut-il escalader sans attendre ?",
       "choices": [
         "Compromission confirmée d'un compte privilégié",
@@ -315,11 +485,18 @@
         "Suspicion d'exfiltration de données",
         "Alerte connue comme faux positif récurrent et documenté"
       ],
-      "answer": [0, 1, 2],
+      "answer": [
+        0,
+        1,
+        2
+      ],
       "explain": "Compte privilégié, propagation et exfiltration sont des critères d'escalade. Un faux positif **documenté** se traite par tuning, pas par escalade."
     },
     {
-      "id": "met-01", "tags": ["metrics"],
+      "id": "met-01",
+      "tags": [
+        "metrics"
+      ],
       "q": "Que mesure le MTTD ?",
       "choices": [
         "Le délai entre le début de l'activité malveillante et sa détection",
@@ -327,11 +504,16 @@
         "Le temps de réponse de l'infrastructure SIEM",
         "Le nombre d'alertes par jour"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "**MTTD** = *Mean Time To Detect*. Le début réel de l'intrusion n'est souvent connu qu'après enquête."
     },
     {
-      "id": "met-02", "tags": ["metrics"],
+      "id": "met-02",
+      "tags": [
+        "metrics"
+      ],
       "q": "Pourquoi un MTTR très bas ne suffit-il pas à prouver l'efficacité d'un SOC ?",
       "choices": [
         "Il peut résulter de clôtures hâtives, au détriment de la qualité des investigations",
@@ -339,11 +521,17 @@
         "Il dépend uniquement du matériel du SIEM",
         "Il ne s'applique qu'aux incidents mineurs"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Loi de Goodhart : une mesure devenue objectif se dégrade. Croise toujours **vitesse et qualité**."
     },
     {
-      "id": "met-03", "tags": ["metrics", "attack"],
+      "id": "met-03",
+      "tags": [
+        "metrics",
+        "attack"
+      ],
       "q": "Quand peut-on dire qu'une technique ATT&CK est réellement « couverte » ?",
       "choices": [
         "Quand les données nécessaires sont collectées et qu'une détection testée existe",
@@ -351,8 +539,332 @@
         "Quand une règle existe, même jamais testée",
         "Quand la technique figure dans la documentation interne"
       ],
-      "answer": [0],
+      "answer": [
+        0
+      ],
       "explain": "Couverture = **visibilité + détection testée**. Avoir des logs n'est pas avoir une détection."
+    },
+    {
+      "id": "log-01",
+      "tags": [
+        "logs"
+      ],
+      "q": "Dans de nombreux événements 4625, le `SubStatus` vaut `0xC0000064` pour des noms d'utilisateur tous différents. Que suggère cette observation ?",
+      "choices": [
+        "Une énumération de comptes : l'attaquant essaie des noms qui n'existent pas",
+        "Des comptes verrouillés à cause d'un brute force",
+        "Des mots de passe expirés",
+        "Des comptes désactivés"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "`0xC0000064` = **le compte n'existe pas**. Beaucoup de noms différents et inexistants indiquent une **devinette de noms d'utilisateur**. `0xC0000234` serait un verrouillage, `0xC0000071` un mot de passe expiré, `0xC0000072` un compte désactivé."
+    },
+    {
+      "id": "log-02",
+      "tags": [
+        "logs"
+      ],
+      "q": "Un 4625 porte `SubStatus = 0xC000006A` sur le compte `backup`. Que signifie ce code ?",
+      "choices": [
+        "Le compte existe mais le mot de passe est incorrect",
+        "Le compte n'existe pas",
+        "Le compte est verrouillé",
+        "L'heure de connexion n'est pas autorisée"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "`0xC000006A` = **bon nom de compte, mauvais mot de passe**. Cela montre que l'attaquant **connaît** des comptes valides."
+    },
+    {
+      "id": "log-03",
+      "tags": [
+        "logs",
+        "windows"
+      ],
+      "q": "Un échec de connexion RDP, sur un serveur avec NLA activé, est généralement journalisé avec quel `LogonType` ?",
+      "choices": [
+        "3 (réseau)",
+        "10 (RemoteInteractive)",
+        "2 (interactif)",
+        "5 (service)"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Avec **NLA**, l'authentification se fait avant l'ouverture de session : l'échec est en **type 3**, alors qu'un **succès** apparaît en **type 10** (ou 7). Chercher uniquement le type 10 fait rater le brute force RDP."
+    },
+    {
+      "id": "log-04",
+      "tags": [
+        "logs",
+        "windows"
+      ],
+      "q": "À quoi sert le champ `TargetLogonId` d'un événement 4624 ?",
+      "choices": [
+        "À relier cette connexion aux événements qui en découlent (4672, activité, déconnexion)",
+        "À indiquer l'adresse IP de la source",
+        "À donner le mot de passe utilisé",
+        "À identifier le contrôleur de domaine"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "C'est l'**identifiant de session** : il permet de suivre ce que cette connexion a fait et de repérer, par exemple, un 4672 (privilèges spéciaux) lié à la même session."
+    },
+    {
+      "id": "log-05",
+      "tags": [
+        "logs",
+        "attack"
+      ],
+      "q": "Parmi ces relations parent → enfant, lesquelles sont typiquement suspectes ?",
+      "choices": [
+        "`winword.exe` → `powershell.exe`",
+        "`w3wp.exe` → `cmd.exe`",
+        "`explorer.exe` → `notepad.exe`",
+        "`services.exe` → `svchost.exe`"
+      ],
+      "answer": [
+        0,
+        1
+      ],
+      "explain": "Un document Office qui lance un interpréteur évoque une **macro malveillante** ; un processus IIS qui lance `cmd.exe` évoque un **webshell**. Les deux autres couples sont normaux."
+    },
+    {
+      "id": "log-06",
+      "tags": [
+        "logs",
+        "data-quality"
+      ],
+      "q": "Après une mise à jour, le format d'un log texte change et la regex d'extraction ne correspond plus. Quel est le risque principal ?",
+      "choices": [
+        "Les champs deviennent vides et les règles cessent de se déclencher sans erreur visible",
+        "Le SIEM refuse de démarrer",
+        "Les logs sont chiffrés",
+        "Les alertes se multiplient automatiquement"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Le parsing casse **en silence** : les données arrivent mais sans champs exploitables. D'où la surveillance du taux de champs vides."
+    },
+    {
+      "id": "log-07",
+      "tags": [
+        "logs",
+        "data-quality"
+      ],
+      "q": "Les logs d'un pare-feu portent `date=2026-03-14 time=09:12:40` sans fuseau. Que fais-tu avant de les corréler avec des logs Windows en UTC ?",
+      "choices": [
+        "Je vérifie le fuseau horaire dans lequel l'équipement journalise",
+        "Je suppose que c'est de l'UTC",
+        "Je supprime la colonne `time`",
+        "Je corrèle uniquement par adresse IP"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Sans fuseau explicite, une hypothèse fausse décale la **chronologie** et fausse la corrélation. Confirme-le, puis normalise en UTC."
+    },
+    {
+      "id": "el-01",
+      "tags": [
+        "elastic",
+        "kql"
+      ],
+      "q": "Que fait la requête KQL `process.name : \"power*\"` ?",
+      "choices": [
+        "Elle cherche littéralement le texte `power*` : le joker n'est pas interprété entre guillemets",
+        "Elle trouve `powershell.exe`",
+        "Elle trouve tous les processus",
+        "Elle déclenche une erreur de syntaxe"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "En KQL, les **jokers ne fonctionnent que sans guillemets** : `process.name : power*`."
+    },
+    {
+      "id": "el-02",
+      "tags": [
+        "elastic",
+        "kql"
+      ],
+      "q": "Quelle requête KQL cible correctement `C:\\Windows\\System32\\cmd.exe` ?",
+      "choices": [
+        "`process.executable : \"C:\\\\Windows\\\\System32\\\\cmd.exe\"`",
+        "`process.executable : \"C:\\Windows\\System32\\cmd.exe\"`",
+        "`process.executable : C:/Windows/System32/cmd.exe`",
+        "`process.executable == C:\\Windows\\System32\\cmd.exe`"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Dans KQL, l'antislash doit être **échappé** (`\\\\`). L'opérateur `==` n'existe pas en KQL (il est propre à EQL)."
+    },
+    {
+      "id": "el-03",
+      "tags": [
+        "elastic",
+        "kql"
+      ],
+      "q": "`process.name : \"PowerShell.exe\"` ne renvoie rien, alors que les logs contiennent `powershell.exe`. Pourquoi ?",
+      "choices": [
+        "Les champs `keyword` sont sensibles à la casse",
+        "Le champ n'existe pas dans ECS",
+        "KQL ne sait pas chercher des noms de fichiers",
+        "L'heure est dans le mauvais fuseau"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Windows ignore la casse, mais un champ **keyword** Elastic non. Teste les variantes ou utilise EQL avec l'opérateur `:` (insensible à la casse selon la version)."
+    },
+    {
+      "id": "el-04",
+      "tags": [
+        "elastic",
+        "eql"
+      ],
+      "q": "Dans `sequence by source.ip with maxspan=10m [authentication where event.code == \"4625\"] with runs=10 [authentication where event.code == \"4624\"]`, que signifie `with runs=10` ?",
+      "choices": [
+        "La première étape doit se produire 10 fois avant l'étape suivante",
+        "La règle s'exécute toutes les 10 minutes",
+        "La séquence dure 10 minutes au maximum",
+        "Seuls 10 résultats sont affichés"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "`runs=10` **répète l'étape**. La durée maximale est portée par `maxspan=10m`, la planification par la règle elle-même."
+    },
+    {
+      "id": "el-05",
+      "tags": [
+        "elastic",
+        "data-quality"
+      ],
+      "q": "Pourquoi configurer un `Additional look-back time` sur une règle Kibana ?",
+      "choices": [
+        "Pour ne pas rater les événements qui arrivent en retard dans le SIEM",
+        "Pour augmenter la sévérité des alertes",
+        "Pour archiver les alertes plus longtemps",
+        "Pour convertir les heures en UTC"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "Les événements arrivent avec un **délai d'ingestion**. Une marge de recouvrement évite qu'ils échappent à la fenêtre d'évaluation."
+    },
+    {
+      "id": "el-06",
+      "tags": [
+        "elastic"
+      ],
+      "q": "Discover n'affiche aucun résultat alors que tu sais que l'événement existe. Que vérifies-tu en premier ?",
+      "choices": [
+        "La plage de temps et la vue de données sélectionnées",
+        "La RAM du serveur Elasticsearch",
+        "Le mot de passe du compte Kibana",
+        "La version du navigateur"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "La **plage de temps trop étroite** et une **mauvaise vue de données** sont les deux causes les plus fréquentes."
+    },
+    {
+      "id": "case-01",
+      "tags": [
+        "cases",
+        "triage"
+      ],
+      "q": "Une alerte de spraying se déclenche chaque mardi à 02:00 depuis le scanner de vulnérabilités interne : 412 échecs, 3 comptes de service, 40 hôtes, toujours `0xC000006A`. Que fais-tu ?",
+      "choices": [
+        "Corriger le mot de passe du compte de scan, puis exclure précisément la source avec justification et revue",
+        "Escalader en incident majeur",
+        "Désactiver la règle",
+        "Ne rien faire car le volume est faible"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "C'est un **faux positif récurrent** dont la cause est opérationnelle (mot de passe du compte de scan obsolète). On corrige la cause, puis on exclut **précisément**."
+    },
+    {
+      "id": "case-02",
+      "tags": [
+        "cases",
+        "triage"
+      ],
+      "q": "Un 4732 ajoute `svc_deploy` au groupe Administrateurs. L'acteur est un admin connu, depuis son poste habituel, pendant une fenêtre couverte par le ticket CHG-2041. Comment classer ?",
+      "choices": [
+        "Vrai positif bénin",
+        "Faux positif",
+        "Faux négatif",
+        "Vrai positif malveillant"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "La règle a **correctement détecté** un ajout privilégié, mais il est **autorisé et prouvé** (acteur, source, heure, ticket)."
+    },
+    {
+      "id": "case-03",
+      "tags": [
+        "cases",
+        "malware"
+      ],
+      "q": "Dans `powershell.exe -enc <chaîne>`, comment la chaîne est-elle encodée ?",
+      "choices": [
+        "Base64 d'un texte en UTF-16 petit-boutiste (UTF-16LE)",
+        "Base64 d'un texte en UTF-8",
+        "Chiffrée en AES",
+        "Compressée en ZIP"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "`-EncodedCommand` attend du **Base64 d'UTF-16LE**. Décoder en UTF-8 donne un texte illisible avec des octets nuls entre les caractères."
+    },
+    {
+      "id": "case-04",
+      "tags": [
+        "cases",
+        "malware"
+      ],
+      "q": "Comment décoder en sécurité une commande PowerShell encodée trouvée dans une alerte ?",
+      "choices": [
+        "L'afficher sans l'exécuter (par exemple `[Text.Encoding]::Unicode.GetString(...)` ou CyberChef), idéalement en environnement isolé",
+        "La coller dans `Invoke-Expression` pour voir ce qu'elle fait",
+        "La lancer sur un poste de production avec un compte administrateur",
+        "L'envoyer telle quelle à un service public d'analyse"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "**Décoder n'est pas exécuter.** N'exécute jamais un contenu inconnu. Évite aussi de soumettre des données internes à un service public."
+    },
+    {
+      "id": "case-05",
+      "tags": [
+        "cases",
+        "data-quality"
+      ],
+      "q": "Après la modification d'une GPO d'audit, un contrôleur de domaine ne produit plus de 4624/4625 alors que l'agent de collecte tourne. Quelle est la cause la plus probable ?",
+      "choices": [
+        "La politique d'audit a été remplacée : les événements ne sont plus générés",
+        "Le SIEM a perdu sa licence",
+        "L'agent est en panne",
+        "Les événements sont envoyés dans un autre fuseau horaire"
+      ],
+      "answer": [
+        0
+      ],
+      "explain": "L'agent **fonctionne** (donc ce n'est pas l'agent) : c'est la **source** qui ne génère plus d'événements. Les détections AD sont **aveugles** tant que l'audit n'est pas rétabli."
     }
   ]
 }

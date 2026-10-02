@@ -69,7 +69,7 @@ def main() -> int:
                 errors.append(f"index.json: {entry['src']} introuvable")
             else:
                 ids[json.loads(target.read_text(encoding="utf-8")).get("id")] = entry["id"]
-            # 'page' est l'URL relative du site (ex: cdsa/01-siem/07-quiz/)
+            # 'page' est l'URL relative du site (ex: cdsa/01-siem/10-quiz/)
             if not (ROOT / (entry["page"].rstrip("/") + ".md")).exists():
                 errors.append(f"index.json: page {entry['page']} introuvable")
         for qid, eid in ids.items():

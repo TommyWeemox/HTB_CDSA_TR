@@ -153,5 +153,5 @@ Une bonne note de clôture contient : **résumé** (1-2 phrases), **chronologie*
 
 ## Pour aller plus loin
 
-- Rejoue ce cas dans ton lab (voir [labs](06-labs.md), lab 5).
+- Rejoue ce cas dans ton lab (voir [labs](09-labs.md), lab 5), puis entraîne-toi sur les [cas travaillés](08-cas-travailles.md).
 - Prépare un modèle de note de clôture dans ton outil de ticketing.
