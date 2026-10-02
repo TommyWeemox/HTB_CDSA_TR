@@ -1,0 +1,39 @@
+.quiz, .quiz-dashboard {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .4rem;
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+}
+.quiz-head { display: flex; align-items: center; gap: .8rem; margin-bottom: .4rem; }
+.quiz-count { font-size: .75rem; white-space: nowrap; color: var(--md-default-fg-color--light); }
+.quiz-bar { flex: 1; height: .3rem; border-radius: .2rem; background: var(--md-default-fg-color--lightest); overflow: hidden; }
+.quiz-bar-fill { height: 100%; background: var(--md-accent-fg-color); transition: width .2s; }
+.quiz-question { font-weight: 600; font-size: .95rem; margin: .8rem 0 .3rem; }
+.quiz-hint { font-size: .75rem; margin: 0 0 .5rem; color: var(--md-default-fg-color--light); }
+.quiz-choices { display: flex; flex-direction: column; gap: .4rem; margin: .6rem 0 1rem; }
+.quiz-choice {
+  display: flex; gap: .6rem; align-items: flex-start;
+  padding: .5rem .7rem; cursor: pointer;
+  border: 1px solid var(--md-default-fg-color--lightest); border-radius: .3rem;
+}
+.quiz-choice:hover { border-color: var(--md-accent-fg-color); }
+.quiz-choice input { margin-top: .3rem; }
+.quiz-choice.is-correct { border-color: #2e9d4f; background: rgba(46, 157, 79, .15); }
+.quiz-choice.is-missed  { border-color: #2e9d4f; border-style: dashed; }
+.quiz-choice.is-wrong   { border-color: #d64545; background: rgba(214, 69, 69, .15); }
+.quiz-feedback { margin-top: 1rem; padding: .6rem .9rem; border-left: 4px solid; border-radius: .2rem; font-size: .85rem; }
+.quiz-feedback.is-good { border-color: #2e9d4f; background: rgba(46, 157, 79, .1); }
+.quiz-feedback.is-bad  { border-color: #d64545; background: rgba(214, 69, 69, .1); }
+.quiz-score { margin-bottom: 0; }
+.quiz-verdict { margin-top: .2rem; }
+.quiz-actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+.quiz-tags, .quiz-dashboard-table { width: 100%; }
+
+/* Téléphone : zones de tap confortables, boutons pleine largeur */
+@media (max-width: 600px) {
+  .quiz, .quiz-dashboard { padding: .8rem; }
+  .quiz-choice { padding: .75rem .8rem; }
+  .quiz-choice input { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+  .quiz-btn, .quiz-actions .md-button { width: 100%; text-align: center; }
+  .quiz-actions { flex-direction: column; }
+}

